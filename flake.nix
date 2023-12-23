@@ -1,5 +1,5 @@
 {
-  description = "Example neovim flake with custom config";
+  description = "u64.cam's neovim flake with custom config";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
@@ -20,7 +20,7 @@
         lua-language-server
       ];
     in rec {
-      packages.nvim-example = pkgs.wrapNeovim pkgs.neovim-unwrapped {
+      packages.custom-nvim-flake = pkgs.wrapNeovim pkgs.neovim-unwrapped {
         extraMakeWrapperArgs = ''--prefix PATH : "${pkgs.lib.makeBinPath dependencies}"'';
         configure = {
           viAlias = true;
@@ -49,11 +49,11 @@
             '';
         };
       };
-      apps.nvim-example = flake-utils.lib.mkApp {
-        drv = packages.nvim-example;
-        name = "nvim-example";
+      apps.custom-nvim-flake = flake-utils.lib.mkApp {
+        drv = packages.custom-nvim-flake;
+        name = "custom-nvim-flake";
         exePath = "/bin/nvim";
       };
-      packages.default = packages.nvim-example;
+      packages.default = packages.custom-nvim-flake;
     });
 }
