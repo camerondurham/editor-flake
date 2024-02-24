@@ -141,6 +141,7 @@ require('lazy').setup({
       char = '┊',
       show_trailing_blankline_indent = false,
     },
+    main = "ibl",
   },
 
   -- "gc" to comment visual regions/lines
