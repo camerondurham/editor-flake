@@ -115,7 +115,13 @@ require('lazy').setup({
     'catppuccin/nvim',
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme 'catppuccin-mocha'
+      -- set to light colorscheme in the day
+      local hr = tonumber(tostring(os.date("%H")), 10)
+      if hr < 18 and hr > 7 then
+        vim.cmd.colorscheme 'catppuccin-latte'
+      else
+        vim.cmd.colorscheme 'catppuccin-mocha'
+      end
     end,
   },
   {
