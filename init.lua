@@ -119,10 +119,6 @@ require('lazy').setup({
     end,
   },
   {
-    'cratelyn/pfil',
-    priority = 50,
-  },
-  {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
     -- See `:help lualine.txt`
