@@ -137,7 +137,9 @@ require('lazy').setup({
     'lukas-reineke/indent-blankline.nvim',
     main = "ibl",
     opts = {
-      char = '┊',
+      indent = {
+        char = '┊'
+      }
     },
   },
 
