@@ -10,6 +10,10 @@ Run with :
 nix run github:camerondurham/editor-flake
 ```
 
+## Demo
+
+[![asciicast](https://asciinema.org/a/qyTgpBhKaf5jcINOs5BLJvuAQ.svg)](https://asciinema.org/a/qyTgpBhKaf5jcINOs5BLJvuAQ)
+
 ## Resources
 
 -  https://github.com/zmre/neovim-nix-simple-example
