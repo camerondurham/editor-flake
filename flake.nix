@@ -18,7 +18,7 @@
       dependencies = with pkgs; [
         ripgrep
         lua-language-server
-	nodejs_21
+	nodejs_18
       ];
     in rec {
       packages.custom-nvim-flake = pkgs.wrapNeovim pkgs.neovim-unwrapped {
