@@ -118,7 +118,8 @@ require('lazy').setup({
       -- set to light colorscheme in the day
       local hr = tonumber(tostring(os.date("%H")), 10)
       if hr < 18 and hr > 7 then
-        vim.cmd.colorscheme 'catppuccin-latte'
+        -- TODO: make this setting configurable via input nix variable?
+        vim.cmd.colorscheme 'catppuccin-frappe'
       else
         vim.cmd.colorscheme 'catppuccin-mocha'
       end
