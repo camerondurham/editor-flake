@@ -119,11 +119,17 @@ require('lazy').setup({
       local hr = tonumber(tostring(os.date("%H")), 10)
       if hr < 18 and hr > 7 then
         -- TODO: make this setting configurable via input nix variable?
-        vim.cmd.colorscheme 'catppuccin-frappe'
+        vim.cmd.colorscheme 'catppuccin-macchiato'
       else
         vim.cmd.colorscheme 'catppuccin-mocha'
       end
     end,
+  },
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
   },
   {
     -- Set lualine as statusline
@@ -424,9 +430,9 @@ end
 --  define the property 'filetypes' to the map in question.
 local servers = {
   -- clangd = {},
-  gopls = {
-    filetypes = { 'go' },
-  },
+  -- gopls = {
+  --   filetypes = { 'go' },
+  -- },
   -- pyright = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
   rust_analyzer = {
