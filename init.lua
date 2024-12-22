@@ -544,5 +544,11 @@ cmp.setup {
   },
 }
 
+-- https://www.gibney.org/a_syntax_for_self-tracking
+vim.api.nvim_set_keymap('n', '<space>t',
+  "o<C-r>=strftime('%F %H:%M ')<CR>",
+  { noremap = true, silent = true, expr = true }
+)
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
