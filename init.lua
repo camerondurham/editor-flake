@@ -1,5 +1,3 @@
--- Set <space> as the leader key
--- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
@@ -103,15 +101,6 @@ require('lazy').setup({
       end,
     },
   },
-
-  -- {
-  --   -- Theme inspired by Atom
-  --   'navarasu/onedark.nvim',
-  --   priority = 1000,
-  --   config = function()
-  --     vim.cmd.colorscheme 'onedark'
-  --   end,
-  -- },
   {
     'catppuccin/nvim',
     priority = 1000,
@@ -452,7 +441,7 @@ local servers = {
   -- gopls = {
   --   filetypes = { 'go' },
   -- },
-  -- pyright = {},
+  -- pyright = { filetypes = { 'py' } },
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
   rust_analyzer = {
     filetypes = { 'rs', 'rust' },
