@@ -188,10 +188,6 @@ require('lazy').setup({
     },
   },
   {
-    'vimwiki/vimwiki'
-  },
-
-  {
     -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
