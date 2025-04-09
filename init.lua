@@ -309,6 +309,10 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 -- Remap for reloading vimrc
 vim.keymap.set('n', '<leader>sv', 'source $MYVIMRC', { desc = '[S]ource [V]imrc' })
 
+-- Remap terminal escape sequence to escape
+-- https://vi.stackexchange.com/questions/4919/exit-from-terminal-mode-in-neovim-vim-8
+vim.keymap.set('t', '<Esc>', '<C-\\><C-n>')
+
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
