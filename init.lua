@@ -120,24 +120,28 @@ require('lazy').setup({
     lazy = false,
     priority = 1000,
     opts = {},
+    config = function()
+      local hr = tonumber(tostring(os.date("%H")), 10)
+      if hr < 18 and hr > 8 then
+        vim.cmd('colorscheme tokyonight')
+      else
+        vim.cmd('colorscheme tokyonight-night')
+      end
+    end
   },
   {
     'projekt0n/github-nvim-theme',
     name = 'github-theme',
     lazy = false,    -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
-    config = function()
-      -- require('github-theme').setup({
-      --   -- ...
-      -- })
-
-      local hr = tonumber(tostring(os.date("%H")), 10)
-      if hr < 18 and hr > 8 then
-        vim.cmd('colorscheme github_dark')
-      else
-        vim.cmd('colorscheme github_dark_high_contrast')
-      end
-    end,
+    -- config = function()
+    --   local hr = tonumber(tostring(os.date("%H")), 10)
+    --   if hr < 18 and hr > 8 then
+    --     vim.cmd('colorscheme github_dark')
+    --   else
+    --     vim.cmd('colorscheme github_dark_high_contrast')
+    --   end
+    -- end,
   },
   {
     -- Set lualine as statusline
@@ -146,7 +150,8 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'github_dark_high_contrast',
+        theme = 'tokyonight',
+        -- theme = 'github_dark_high_contrast',
         component_separators = '|',
         section_separators = '',
       },
@@ -203,35 +208,68 @@ require('lazy').setup({
     },
   },
   {
-  "epwalsh/obsidian.nvim",
-  version = "*",  -- recommended, use latest release instead of latest commit
-  lazy = true,
-  ft = "markdown",
-  -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
-  -- event = {
-  --   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
-  --   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/*.md"
-  --   -- refer to `:h file-pattern` for more examples
-  --   "BufReadPre path/to/my-vault/*.md",
-  --   "BufNewFile path/to/my-vault/*.md",
-  -- },
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-  },
-  opts = {
-    workspaces = {
-      {
-        name = "personal",
-        path = "~/Documents/obsidian/personal",
-      },
-      {
-        name = "work",
-        path = "~/Documents/obsidian/work",
-      },
+    "epwalsh/obsidian.nvim",
+    version = "*", -- recommended, use latest release instead of latest commit
+    lazy = true,
+    ft = "markdown",
+    -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
+    -- event = {
+    --   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
+    --   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/*.md"
+    --   -- refer to `:h file-pattern` for more examples
+    --   "BufReadPre path/to/my-vault/*.md",
+    --   "BufNewFile path/to/my-vault/*.md",
+    -- },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
     },
+    opts = {
+      workspaces = {
+        {
+          name = "personal",
+          path = "~/Documents/obsidian/personal",
+        },
+        {
+          name = "work",
+          path = "~/Documents/obsidian/work",
+        },
+      },
 
+    },
   },
-},
+  {
+
+    "folke/twilight.nvim",
+    opts = {
+      -- these are the default options
+      dimming = {
+        alpha = 0.25, -- amount of dimming
+        -- we try to get the foreground from the highlight groups or fallback color
+        color = { "Normal", "#ffffff" },
+        term_bg = "#000000", -- if guibg=NONE, this will be used to calculate text color
+        inactive = false,    -- when true, other windows will be fully dimmed (unless they contain the same buffer)
+      },
+      context = 10,          -- amount of lines we will try to show around the current line
+      treesitter = true,     -- use treesitter when available for the filetype
+      -- treesitter is used to automatically expand the visible text,
+      -- but you can further control the types of nodes that should always be fully expanded
+      expand = { -- for treesitter, we we always try to expand to the top-most ancestor with these types
+        "function",
+        "method",
+        "table",
+        "if_statement",
+      },
+      exclude = {}, -- exclude these filetypes
+    }
+  },
+  {
+    "folke/zen-mode.nvim",
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+    }
+  }
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.

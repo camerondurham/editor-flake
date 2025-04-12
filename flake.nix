@@ -18,9 +18,11 @@
       dependencies = with pkgs; [
         ripgrep
         lua-language-server
-	nodejs_18
+        nodejs_18
       ];
     in rec {
+      formatter = pkgs.alejandra;
+
       packages.custom-nvim-flake = pkgs.wrapNeovim pkgs.neovim-unwrapped {
         extraMakeWrapperArgs = ''--prefix PATH : "${pkgs.lib.makeBinPath dependencies}"'';
         configure = {
@@ -37,6 +39,8 @@
               nvim-treesitter.withAllGrammars
               oil-nvim # file navigator
               telescope-nvim
+              zen-mode-nvim
+              twilight-nvim
             ];
             opt = [];
           };
