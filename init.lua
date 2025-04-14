@@ -106,13 +106,13 @@ require('lazy').setup({
     priority = 1000,
     config = function()
       -- set to light colorscheme in the day
-      -- local hr = tonumber(tostring(os.date("%H")), 10)
-      -- if hr < 18 and hr > 7 then
-      --   -- TODO: make this setting configurable via input nix variable?
-      --   vim.cmd.colorscheme 'catppuccin-macchiato'
-      -- else
-      --   vim.cmd.colorscheme 'catppuccin-mocha'
-      -- end
+      local hr = tonumber(tostring(os.date("%H")), 10)
+      if hr < 18 and hr > 6 then
+        -- TODO: make this setting configurable via input nix variable?
+        vim.cmd.colorscheme 'catppuccin-macchiato'
+      else
+        vim.cmd.colorscheme 'catppuccin-mocha'
+      end
     end,
   },
   {
@@ -120,14 +120,14 @@ require('lazy').setup({
     lazy = false,
     priority = 1000,
     opts = {},
-    config = function()
-      local hr = tonumber(tostring(os.date("%H")), 10)
-      if hr < 18 and hr > 8 then
-        vim.cmd('colorscheme tokyonight')
-      else
-        vim.cmd('colorscheme tokyonight-night')
-      end
-    end
+    -- config = function()
+    --   local hr = tonumber(tostring(os.date("%H")), 10)
+    --   if hr < 18 and hr > 8 then
+    --     vim.cmd('colorscheme tokyonight')
+    --   else
+    --     vim.cmd('colorscheme tokyonight-night')
+    --   end
+    -- end
   },
   {
     'projekt0n/github-nvim-theme',
