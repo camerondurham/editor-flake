@@ -102,17 +102,28 @@ require('lazy').setup({
     },
   },
   {
+    "scottmckendry/cyberdream.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.cmd.colorscheme 'cyberdream'
+
+      -- Add a custom keybinding to toggle the colorscheme
+      vim.api.nvim_set_keymap("n", "<leader>tt", ":CyberdreamToggleMode<CR>", { noremap = true, silent = true })
+    end,
+  },
+  {
     'catppuccin/nvim',
     priority = 1000,
     config = function()
       -- set to light colorscheme in the day
-      local hr = tonumber(tostring(os.date("%H")), 10)
-      if hr < 18 and hr > 6 then
-        -- TODO: make this setting configurable via input nix variable?
-        vim.cmd.colorscheme 'catppuccin-macchiato'
-      else
-        vim.cmd.colorscheme 'catppuccin-mocha'
-      end
+      -- local hr = tonumber(tostring(os.date("%H")), 10)
+      -- if hr < 18 and hr > 6 then
+      --   -- TODO: make this setting configurable via input nix variable?
+      --   vim.cmd.colorscheme 'catppuccin-macchiato'
+      -- else
+      --   vim.cmd.colorscheme 'catppuccin-mocha'
+      -- end
     end,
   },
   {
@@ -150,7 +161,7 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'tokyonight',
+        theme = 'cyberdream',
         -- theme = 'github_dark_high_contrast',
         component_separators = '|',
         section_separators = '',
@@ -616,3 +627,62 @@ vim.api.nvim_set_keymap('n', '<space>t', 'o<C-r>=strftime("%F %H:%M ")<CR>', { n
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+--
+--
+vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>")
+
+local state = {
+  floating = {
+    buf = -1,
+    win = -1,
+  }
+}
+
+local function create_floating_window(opts)
+  opts = opts or {}
+  local width = opts.width or math.floor(vim.o.columns * 0.8)
+  local height = opts.height or math.floor(vim.o.lines * 0.4)
+
+  -- Calculate the position to center the window
+  local col = math.floor((vim.o.columns - width) / 2)
+  local row = math.floor((vim.o.lines - height) / 2)
+
+  -- Create a buffer
+  local buf = nil
+  if vim.api.nvim_buf_is_valid(opts.buf) then
+    buf = opts.buf
+  else
+    buf = vim.api.nvim_create_buf(false, true) -- No file, scratch buffer
+  end
+
+  -- Define window configuration
+  local win_config = {
+    relative = "editor",
+    width = width,
+    height = height,
+    col = col,
+    row = row,
+    style = "minimal", -- No borders or extra UI elements
+    border = "rounded",
+  }
+
+  -- Create the floating window
+  local win = vim.api.nvim_open_win(buf, true, win_config)
+
+  return { buf = buf, win = win }
+end
+
+local toggle_terminal = function()
+  if not vim.api.nvim_win_is_valid(state.floating.win) then
+    state.floating = create_floating_window { buf = state.floating.buf }
+    if vim.bo[state.floating.buf].buftype ~= "terminal" then
+      vim.cmd.terminal()
+    end
+  else
+    vim.api.nvim_win_hide(state.floating.win)
+  end
+end
+
+-- Example usage:
+-- Create a floating window with default dimensions
+vim.api.nvim_create_user_command("Floaterminal", toggle_terminal, {})
