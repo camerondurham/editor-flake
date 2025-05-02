@@ -105,25 +105,25 @@ require('lazy').setup({
     "scottmckendry/cyberdream.nvim",
     lazy = false,
     priority = 1000,
-    config = function()
-      vim.cmd.colorscheme 'cyberdream'
-
-      -- Add a custom keybinding to toggle the colorscheme
-      vim.api.nvim_set_keymap("n", "<leader>tt", ":CyberdreamToggleMode<CR>", { noremap = true, silent = true })
-    end,
+    -- config = function()
+    --   vim.cmd.colorscheme 'cyberdream'
+    --
+    --   -- Add a custom keybinding to toggle the colorscheme
+    --   vim.api.nvim_set_keymap("n", "<leader>tt", ":CyberdreamToggleMode<CR>", { noremap = true, silent = true })
+    -- end,
   },
   {
     'catppuccin/nvim',
     priority = 1000,
     config = function()
       -- set to light colorscheme in the day
-      -- local hr = tonumber(tostring(os.date("%H")), 10)
-      -- if hr < 18 and hr > 6 then
-      --   -- TODO: make this setting configurable via input nix variable?
-      --   vim.cmd.colorscheme 'catppuccin-macchiato'
-      -- else
-      --   vim.cmd.colorscheme 'catppuccin-mocha'
-      -- end
+      local hr = tonumber(tostring(os.date("%H")), 10)
+      if hr < 18 and hr > 6 then
+        -- TODO: make this setting configurable via input nix variable?
+        vim.cmd.colorscheme 'catppuccin-macchiato'
+      else
+        vim.cmd.colorscheme 'catppuccin-mocha'
+      end
     end,
   },
   {
