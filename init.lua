@@ -161,7 +161,7 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'cyberdream',
+        theme = 'catppuccin',
         -- theme = 'github_dark_high_contrast',
         component_separators = '|',
         section_separators = '',
@@ -214,9 +214,7 @@ require('lazy').setup({
   {
     "tadmccorkle/markdown.nvim",
     ft = "markdown", -- or 'event = "VeryLazy"'
-    opts = {
-      -- configuration here or empty for defaults
-    },
+    -- opts = { },
   },
   {
     "epwalsh/obsidian.nvim",
@@ -275,11 +273,7 @@ require('lazy').setup({
   },
   {
     "folke/zen-mode.nvim",
-    opts = {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
-    }
+    -- opts = { }
   }
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
@@ -623,7 +617,7 @@ cmp.setup {
 }
 
 -- https://www.gibney.org/a_syntax_for_self-tracking
-vim.api.nvim_set_keymap('n', '<space>t', 'o<C-r>=strftime("%F %H:%M ")<CR>', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<space>t', 'o<C-r>=strftime("%F %H:%M ")<CR>', { noremap = true, silent = true })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
@@ -641,7 +635,7 @@ local state = {
 local function create_floating_window(opts)
   opts = opts or {}
   local width = opts.width or math.floor(vim.o.columns * 0.8)
-  local height = opts.height or math.floor(vim.o.lines * 0.4)
+  local height = opts.height or math.floor(vim.o.lines * 0.6)
 
   -- Calculate the position to center the window
   local col = math.floor((vim.o.columns - width) / 2)
@@ -686,3 +680,6 @@ end
 -- Example usage:
 -- Create a floating window with default dimensions
 vim.api.nvim_create_user_command("Floaterminal", toggle_terminal, {})
+
+-- Bind function using tt command
+vim.keymap.set('n', '<leader>tt', toggle_terminal, { noremap = true, silent = true, desc = 'Toggle floating terminal' })

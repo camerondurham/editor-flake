@@ -18,7 +18,7 @@
       dependencies = with pkgs; [
         ripgrep
         lua-language-server
-        # nodejs_18
+        nodejs_18
       ];
     in rec {
       formatter = pkgs.alejandra;
